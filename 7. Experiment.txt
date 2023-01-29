@@ -1,0 +1,143 @@
+Enter password: *********
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 6
+Server version: 5.5.62 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use School;
+Database changed
+mysql> select * from School;
++--------+-------------+-------------+-------+-------+
+| Rollno | Studentname | course      | grade | marks |
++--------+-------------+-------------+-------+-------+
+|     15 | Kowshik     | DBMS        | A     |    90 |
+|      3 | saravanan   | Mathematics | C     |    83 |
+|     26 | Poorani     | Biology     | B     |    78 |
+|     29 | Dhanush     | Chemistry   | C     |    65 |
+|     45 | Deepak      | Cs          | D     |    55 |
++--------+-------------+-------------+-------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select Rollno,studentname order by grade;
+ERROR 1054 (42S22): Unknown column 'Rollno' in 'field list'
+mysql> select studentname,course order by grade;
+ERROR 1054 (42S22): Unknown column 'studentname' in 'field list'
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| college            |
+| course             |
+| courses            |
+| data               |
+| doctor             |
+| employee           |
+| faculty            |
+| mysql              |
+| performance_schema |
+| school             |
+| student            |
+| test               |
++--------------------+
+13 rows in set (0.01 sec)
+
+mysql> use employee;
+Database changed
+mysql> select * from Employee;
++----------------+--------------+--------+------+------+--------------+--------+
+| Employeenumber | Employeename | Gender | DOB  | DOJ  | Mobilenumber | Deptno |
++----------------+--------------+--------+------+------+--------------+--------+
+| 12             | Vinod        | M      |   17 |   23 |      6747398 | Boss   |
+| 15             | Vinith       | M      |   18 |   23 |       947574 | Dm     |
+| 5              | santhosh     | M      |   23 |   28 |     83646738 | IT     |
+| 3              | Ashwin       | M      |   18 |   13 |     98404697 | AIDS   |
+| 10             | Vijay        | M      |    9 |   17 |     98643098 | CSE    |
++----------------+--------------+--------+------+------+--------------+--------+
+5 rows in set (0.01 sec)
+
+mysql> select Employeenumber,Employeename,gender from Employee order by DOJ;
++----------------+--------------+--------+
+| Employeenumber | Employeename | gender |
++----------------+--------------+--------+
+| 3              | Ashwin       | M      |
+| 10             | Vijay        | M      |
+| 12             | Vinod        | M      |
+| 15             | Vinith       | M      |
+| 5              | santhosh     | M      |
++----------------+--------------+--------+
+5 rows in set (0.00 sec)
+
+mysql> use School;
+Database changed
+mysql> select * from School;
++--------+-------------+-------------+-------+-------+
+| Rollno | Studentname | course      | grade | marks |
++--------+-------------+-------------+-------+-------+
+|     15 | Kowshik     | DBMS        | A     |    90 |
+|      3 | saravanan   | Mathematics | C     |    83 |
+|     26 | Poorani     | Biology     | B     |    78 |
+|     29 | Dhanush     | Chemistry   | C     |    65 |
+|     45 | Deepak      | Cs          | D     |    55 |
++--------+-------------+-------------+-------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select Rollno,Studentname from School order by grade;
++--------+-------------+
+| Rollno | Studentname |
++--------+-------------+
+|     15 | Kowshik     |
+|     26 | Poorani     |
+|      3 | saravanan   |
+|     29 | Dhanush     |
+|     45 | Deepak      |
++--------+-------------+
+5 rows in set (0.00 sec)
+
+mysql> select count(marks) from School;
++--------------+
+| count(marks) |
++--------------+
+|            5 |
++--------------+
+1 row in set (0.01 sec)
+
+mysql> select avg(marks) from School;
++------------+
+| avg(marks) |
++------------+
+|    74.2000 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select count(studentname),Rollno from School;
++--------------------+--------+
+| count(studentname) | Rollno |
++--------------------+--------+
+|                  5 |     15 |
++--------------------+--------+
+1 row in set (0.00 sec)
+
+mysql> select Studentname,Rollno from School;
++-------------+--------+
+| Studentname | Rollno |
++-------------+--------+
+| Kowshik     |     15 |
+| saravanan   |      3 |
+| Poorani     |     26 |
+| Dhanush     |     29 |
+| Deepak      |     45 |
++-------------+--------+
+5 rows in set (0.00 sec)
+
+mysql> select count(Student),Rollno from School
+    -> group by Rollno having count(Studentname)>0;
+ERROR 1054 (42S22): Unknown column 'Student' in 'field list'
+mysql>
